@@ -12,8 +12,10 @@ import java.util.List;
 
 /**
  * Created by almouro on 19/11/15.
+ * Edited by Vladlen Kaveev on 13/08/21
  */
-public class ImageResizerPackage implements ReactPackage {
+
+public class RotatePhotoPackage implements ReactPackage {
     /**
      * @param reactContext react application context that can be used to create modules
      * @return list of native modules to register with the newly created catalyst instance
@@ -21,7 +23,7 @@ public class ImageResizerPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new ImageResizerModule(reactContext));
+        modules.add(new RotatePhotoModule(reactContext));
 
         return modules;
     }

@@ -24,10 +24,10 @@ import java.util.UUID;
  * Created by almouro on 19/11/15.
  * Updated by Cristiano on 2019-05-12
  */
-public class ImageResizerModule extends ReactContextBaseJavaModule {
+public class RotatePhotoModule extends ReactContextBaseJavaModule {
     private Context context;
 
-    public ImageResizerModule(ReactApplicationContext reactContext) {
+    public RotatePhotoModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.context = reactContext;
     }
@@ -38,7 +38,7 @@ public class ImageResizerModule extends ReactContextBaseJavaModule {
      */
     @Override
     public String getName() {
-        return "ImageResizerAndroid";
+        return "RotatePhotoAndroid";
     }
 
     @ReactMethod
@@ -78,7 +78,7 @@ public class ImageResizerModule extends ReactContextBaseJavaModule {
         Bitmap.CompressFormat compressFormat = Bitmap.CompressFormat.valueOf(compressFormatString);
         Uri imageUri = Uri.parse(imagePath);
 
-        Bitmap scaledImage = ImageResizer.createResizedImage(this.context, imageUri, newWidth, newHeight, quality, rotation,
+        Bitmap scaledImage = RotatePhoto.createResizedImage(this.context, imageUri, newWidth, newHeight, quality, rotation,
                                                              options.getString("mode"), options.getBoolean("onlyScaleDown"));
 
         if (scaledImage == null) {
@@ -91,7 +91,7 @@ public class ImageResizerModule extends ReactContextBaseJavaModule {
             path = new File(outputPath);
         }
 
-        File resizedImage = ImageResizer.saveImage(scaledImage, path, UUID.randomUUID().toString(), compressFormat, quality);
+        File resizedImage = RotatePhoto.saveImage(scaledImage, path, UUID.randomUUID().toString(), compressFormat, quality);
 
         // If resizedImagePath is empty and this wasn't caught earlier, throw.
         if (resizedImage.isFile()) {
@@ -106,10 +106,10 @@ public class ImageResizerModule extends ReactContextBaseJavaModule {
             // Copy file's metadata/exif info if required
             if(keepMeta){
                 try{
-                    ImageResizer.copyExif(this.context, imageUri, resizedImage.getAbsolutePath());
+                    RotatePhoto.copyExif(this.context, imageUri, resizedImage.getAbsolutePath());
                 }
                 catch(Exception ignored){
-                    Log.e("ImageResizer::createResizedImageWithExceptions", "EXIF copy failed", ignored);
+                    Log.e("RotatePhoto::createResizedImageWithExceptions", "EXIF copy failed", ignored);
                 };
             }
 

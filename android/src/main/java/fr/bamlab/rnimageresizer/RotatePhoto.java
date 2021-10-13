@@ -24,7 +24,7 @@ import java.util.Date;
 /**
  * Provide methods to resize and rotate an image file.
  */
-public class ImageResizer {
+public class RotatePhoto {
     private final static String IMAGE_JPEG = "image/jpeg";
     private final static String IMAGE_PNG = "image/png";
     private final static String SCHEME_DATA = "data";
@@ -233,7 +233,7 @@ public class ImageResizer {
             dst = new ExifInterface(dstPath);
 
         } catch (Exception ignored) {
-            Log.e("ImageResizer::copyExif", "EXIF read failed", ignored);
+            Log.e("RotatePhoto::copyExif", "EXIF read failed", ignored);
         }
 
         if(src == null || dst == null){
@@ -252,7 +252,7 @@ public class ImageResizer {
             dst.saveAttributes();
 
         } catch (Exception ignored) {
-            Log.e("ImageResizer::copyExif", "EXIF copy failed", ignored);
+            Log.e("RotatePhoto::copyExif", "EXIF copy failed", ignored);
             return false;
         }
 
@@ -473,11 +473,11 @@ public class ImageResizer {
             imageUriScheme.equalsIgnoreCase(SCHEME_FILE) ||
             imageUriScheme.equalsIgnoreCase(SCHEME_CONTENT)
         ) {
-            sourceImage = ImageResizer.loadBitmapFromFile(context, imageUri, newWidth, newHeight);
+            sourceImage = RotatePhoto.loadBitmapFromFile(context, imageUri, newWidth, newHeight);
         } else if (imageUriScheme.equalsIgnoreCase(SCHEME_HTTP) || imageUriScheme.equalsIgnoreCase(SCHEME_HTTPS)){
-            sourceImage = ImageResizer.loadBitmapFromURL(imageUri, newWidth, newHeight);
+            sourceImage = RotatePhoto.loadBitmapFromURL(imageUri, newWidth, newHeight);
         } else if (imageUriScheme.equalsIgnoreCase(SCHEME_DATA)) {
-            sourceImage = ImageResizer.loadBitmapFromBase64(imageUri);
+            sourceImage = RotatePhoto.loadBitmapFromBase64(imageUri);
         }
 
         if (sourceImage == null) {
@@ -491,7 +491,7 @@ public class ImageResizer {
         Bitmap rotatedImage = sourceImage;
         int orientation = getOrientation(context, imageUri);
         rotation = orientation + rotation;
-        rotatedImage = ImageResizer.rotateImage(sourceImage, rotation);
+        rotatedImage = RotatePhoto.rotateImage(sourceImage, rotation);
 
         if(rotatedImage == null){
             throw new IOException("Unable to rotate image. Most likely due to not enough memory.");
@@ -501,17 +501,6 @@ public class ImageResizer {
             sourceImage.recycle();
         }
 
-        // Scale image
-//         Bitmap scaledImage = ImageResizer.resizeImage(rotatedImage, newWidth, newHeight, mode, onlyScaleDown);
-
-//         if(scaledImage == null){
-//             throw new IOException("Unable to resize image. Most likely due to not enough memory.");
-//         }
-
-//         if (scaledImage != rotatedImage) {
-//             rotatedImage.recycle();
-//         }
-
-        return scaledImage;
+        return rotatedImage;
     }
 }
