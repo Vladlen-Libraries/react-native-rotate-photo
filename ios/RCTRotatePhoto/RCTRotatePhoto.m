@@ -1,11 +1,11 @@
 //
-//  ImageResize.m
-//  ChoozItApp
+//  RotatePhoto.m
 //
 //  Created by Florian Rival on 19/11/15.
+//  Edited by Vladlen Kaveev on 13/08/21.
 //
 
-#include "RCTImageResizer.h"
+#include "RCTRotatePhoto.h"
 
 #if __has_include(<React/RCTBridgeModule.h>)
 #import <React/RCTBridgeModule.h>
@@ -18,7 +18,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@implementation ImageResizer
+@implementation RotatePhoto
 
 @synthesize bridge = _bridge;
 
@@ -224,8 +224,7 @@ void transformImage(UIImage *image,
                     NSString* fullPath,
                     NSString* format,
                     int quality,
-                    BOOL keepMeta,
-                    NSDictionary* options)
+                    BOOL keepMeta)
 {
     if (image == nil) {
         callback(@[@"Can't retrieve the file from the path.", @""]);
@@ -286,7 +285,6 @@ RCT_EXPORT_METHOD(createResizedImage:(NSString *)path
                   rotation:(float)rotation
                   outputPath:(NSString *)outputPath
                   keepMeta:(BOOL)keepMeta
-                  options:(NSDictionary *)options
                   callback:(RCTResponseSenderBlock)callback)
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -321,7 +319,7 @@ RCT_EXPORT_METHOD(createResizedImage:(NSString *)path
                 return;
             }
 
-            transformImage(image, path, callback, rotation, newSize, fullPath, format, quality, keepMeta, options);
+            transformImage(image, path, callback, rotation, newSize, fullPath, format, quality, keepMeta);
         }];
     });
 }

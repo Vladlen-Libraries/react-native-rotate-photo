@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D72D2EC1C16249000E22EC1 /* RCTImageResizer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5D72D2EB1C16249000E22EC1 /* RCTImageResizer.h */; };
-		5D72D2EE1C16249000E22EC1 /* RCTImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D72D2ED1C16249000E22EC1 /* RCTImageResizer.m */; };
+		5D72D2EC1C16249000E22EC1 /* RCTRotatePhoto.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5D72D2EB1C16249000E22EC1 /* RCTRotatePhoto.h */; };
+		5D72D2EE1C16249000E22EC1 /* RCTRotatePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D72D2ED1C16249000E22EC1 /* RCTRotatePhoto.m */; };
 		B62D1C4C1C95C21300AD70F2 /* ImageHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B62D1C4B1C95C21300AD70F2 /* ImageHelpers.m */; };
 /* End PBXBuildFile section */
 
@@ -19,16 +19,16 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				5D72D2EC1C16249000E22EC1 /* RCTImageResizer.h in CopyFiles */,
+				5D72D2EC1C16249000E22EC1 /* RCTRotatePhoto.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5D72D2E81C16249000E22EC1 /* libRCTImageResizer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTImageResizer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D72D2EB1C16249000E22EC1 /* RCTImageResizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageResizer.h; sourceTree = "<group>"; };
-		5D72D2ED1C16249000E22EC1 /* RCTImageResizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageResizer.m; sourceTree = "<group>"; };
+		5D72D2E81C16249000E22EC1 /* libRCTRotatePhoto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTRotatePhoto.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D72D2EB1C16249000E22EC1 /* RCTRotatePhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTRotatePhoto.h; sourceTree = "<group>"; };
+		5D72D2ED1C16249000E22EC1 /* RCTRotatePhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTRotatePhoto.m; sourceTree = "<group>"; };
 		B62D1C4A1C95C21300AD70F2 /* ImageHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelpers.h; sourceTree = "<group>"; };
 		B62D1C4B1C95C21300AD70F2 /* ImageHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelpers.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,7 +47,7 @@
 		5D72D2DF1C16249000E22EC1 = {
 			isa = PBXGroup;
 			children = (
-				5D72D2EA1C16249000E22EC1 /* RCTImageResizer */,
+				5D72D2EA1C16249000E22EC1 /* RCTRotatePhoto */,
 				5D72D2E91C16249000E22EC1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,28 +55,28 @@
 		5D72D2E91C16249000E22EC1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5D72D2E81C16249000E22EC1 /* libRCTImageResizer.a */,
+				5D72D2E81C16249000E22EC1 /* libRCTRotatePhoto.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5D72D2EA1C16249000E22EC1 /* RCTImageResizer */ = {
+		5D72D2EA1C16249000E22EC1 /* RCTRotatePhoto */ = {
 			isa = PBXGroup;
 			children = (
-				5D72D2EB1C16249000E22EC1 /* RCTImageResizer.h */,
-				5D72D2ED1C16249000E22EC1 /* RCTImageResizer.m */,
+				5D72D2EB1C16249000E22EC1 /* RCTRotatePhoto.h */,
+				5D72D2ED1C16249000E22EC1 /* RCTRotatePhoto.m */,
 				B62D1C4A1C95C21300AD70F2 /* ImageHelpers.h */,
 				B62D1C4B1C95C21300AD70F2 /* ImageHelpers.m */,
 			);
-			path = RCTImageResizer;
+			path = RCTRotatePhoto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5D72D2E71C16249000E22EC1 /* RCTImageResizer */ = {
+		5D72D2E71C16249000E22EC1 /* RCTRotatePhoto */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5D72D2F11C16249000E22EC1 /* Build configuration list for PBXNativeTarget "RCTImageResizer" */;
+			buildConfigurationList = 5D72D2F11C16249000E22EC1 /* Build configuration list for PBXNativeTarget "RCTRotatePhoto" */;
 			buildPhases = (
 				5D72D2E41C16249000E22EC1 /* Sources */,
 				5D72D2E51C16249000E22EC1 /* Frameworks */,
@@ -86,9 +86,9 @@
 			);
 			dependencies = (
 			);
-			name = RCTImageResizer;
-			productName = RCTImageResizer;
-			productReference = 5D72D2E81C16249000E22EC1 /* libRCTImageResizer.a */;
+			name = RCTRotatePhoto;
+			productName = RCTRotatePhoto;
+			productReference = 5D72D2E81C16249000E22EC1 /* libRCTRotatePhoto.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -105,11 +105,12 @@
 					};
 				};
 			};
-			buildConfigurationList = 5D72D2E31C16249000E22EC1 /* Build configuration list for PBXProject "RCTImageResizer" */;
+			buildConfigurationList = 5D72D2E31C16249000E22EC1 /* Build configuration list for PBXProject "RCTRotatePhoto" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 5D72D2DF1C16249000E22EC1;
@@ -117,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5D72D2E71C16249000E22EC1 /* RCTImageResizer */,
+				5D72D2E71C16249000E22EC1 /* RCTRotatePhoto */,
 			);
 		};
 /* End PBXProject section */
@@ -127,7 +128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D72D2EE1C16249000E22EC1 /* RCTImageResizer.m in Sources */,
+				5D72D2EE1C16249000E22EC1 /* RCTRotatePhoto.m in Sources */,
 				B62D1C4C1C95C21300AD70F2 /* ImageHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +251,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5D72D2E31C16249000E22EC1 /* Build configuration list for PBXProject "RCTImageResizer" */ = {
+		5D72D2E31C16249000E22EC1 /* Build configuration list for PBXProject "RCTRotatePhoto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5D72D2EF1C16249000E22EC1 /* Debug */,
@@ -259,7 +260,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5D72D2F11C16249000E22EC1 /* Build configuration list for PBXNativeTarget "RCTImageResizer" */ = {
+		5D72D2F11C16249000E22EC1 /* Build configuration list for PBXNativeTarget "RCTRotatePhoto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5D72D2F21C16249000E22EC1 /* Debug */,
