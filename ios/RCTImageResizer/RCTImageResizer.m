@@ -149,80 +149,6 @@ UIImage * rotateImage(UIImage *inputImage, float rotationDegrees)
     }
 }
 
-float getScaleForProportionalResize(CGSize theSize, CGSize intoSize, bool onlyScaleDown, bool maximize)
-{
-    float    sx = theSize.width;
-    float    sy = theSize.height;
-    float    dx = intoSize.width;
-    float    dy = intoSize.height;
-    float    scale    = 1;
-
-    if( sx != 0 && sy != 0 )
-    {
-        dx    = dx / sx;
-        dy    = dy / sy;
-
-        // if maximize is true, take LARGER of the scales, else smaller
-        if (maximize) {
-            scale = MAX(dx, dy);
-        } else {
-            scale = MIN(dx, dy);
-        }
-
-        if (onlyScaleDown) {
-            scale = MIN(scale, 1);
-        }
-    }
-    else
-    {
-        scale     = 0;
-    }
-    return scale;
-}
-
-
-// returns a resized image keeping aspect ratio and considering
-// any :image scale factor.
-// The returned image is an unscaled image (scale = 1.0)
-// so no additional scaling math needs to be done to get its pixel dimensions
-UIImage* scaleImage (UIImage* image, CGSize toSize, NSString* mode, bool onlyScaleDown)
-{
-
-    // Need to do scaling corrections
-    // based on scale, since UIImage width/height gives us
-    // a possibly scaled image (dimensions in points)
-    // Idea taken from RNCamera resize code
-    CGSize imageSize = CGSizeMake(image.size.width * image.scale, image.size.height * image.scale);
-
-    // using this instead of ImageHelpers allows us to consider
-    // rotation variations
-    CGSize newSize;
-    
-    if ([mode isEqualToString:@"stretch"]) {
-        // Distort aspect ratio
-        int width = toSize.width;
-        int height = toSize.height;
-
-        if (onlyScaleDown) {
-            width = MIN(width, imageSize.width);
-            height = MIN(height, imageSize.height);
-        }
-
-        newSize = CGSizeMake(width, height);
-    } else {
-        // Either "contain" (default) or "cover": preserve aspect ratio
-        bool maximize = [mode isEqualToString:@"cover"];
-        float scale = getScaleForProportionalResize(imageSize, toSize, onlyScaleDown, maximize);
-        newSize = CGSizeMake(roundf(imageSize.width * scale), roundf(imageSize.height * scale));
-    }
-
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 1.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
 // Returns the image's metadata, or nil if failed to retrieve it.
 NSMutableDictionary * getImageMeta(NSString * path)
 {
@@ -315,20 +241,6 @@ void transformImage(UIImage *image,
         }
     }
 
-    // Do the resizing
-    UIImage * scaledImage = scaleImage(
-        image,
-        newSize,
-        options[@"mode"],
-        [[options objectForKey:@"onlyScaleDown"] boolValue]
-    );
-
-    if (scaledImage == nil) {
-        callback(@[@"Can't resize the image.", @""]);
-        return;
-    }
-
-
     NSMutableDictionary *metadata = nil;
 
     // to be consistent with Android, we will only allow JPEG
@@ -345,7 +257,7 @@ void transformImage(UIImage *image,
     }
 
     // Compress and save the image
-    if (!saveImage(fullPath, scaledImage, format, quality, metadata)) {
+    if (!saveImage(fullPath, image, format, quality, metadata)) {
         callback(@[@"Can't save the image. Check your compression format and your output path", @""]);
         return;
     }
@@ -359,8 +271,8 @@ void transformImage(UIImage *image,
                                @"uri": fileUrl.absoluteString,
                                @"name": fileName,
                                @"size": fileSize == nil ? @(0) : fileSize,
-                               @"width": @(scaledImage.size.width),
-                               @"height": @(scaledImage.size.height)
+                               @"width": @(image.size.width),
+                               @"height": @(image.size.height)
                                };
 
     callback(@[[NSNull null], response]);
