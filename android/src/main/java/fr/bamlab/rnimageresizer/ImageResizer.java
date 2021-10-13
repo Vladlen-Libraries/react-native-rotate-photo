@@ -132,59 +132,6 @@ public class ImageResizer {
         ExifInterface.TAG_WHITE_BALANCE
     };
 
-
-
-    /**
-     * Resize the specified bitmap.
-     */
-    private static Bitmap resizeImage(Bitmap image, int newWidth, int newHeight,
-                                      String mode, boolean onlyScaleDown) {
-        Bitmap newImage = null;
-        if (image == null) {
-            return null; // Can't load the image from the given path.
-        }
-
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        if (newHeight > 0 && newWidth > 0) {
-            int finalWidth;
-            int finalHeight;
-
-            if (mode.equals("stretch")) {
-                // Distort aspect ratio
-                finalWidth = newWidth;
-                finalHeight = newHeight;
-
-                if (onlyScaleDown) {
-                    finalWidth = Math.min(width, finalWidth);
-                    finalHeight = Math.min(height, finalHeight);
-                }
-            } else {
-                // "contain" (default) or "cover": keep its aspect ratio
-                float widthRatio = (float) newWidth / width;
-                float heightRatio = (float) newHeight / height;
-
-                float ratio = mode.equals("cover") ? 
-                    Math.max(widthRatio, heightRatio) :
-                    Math.min(widthRatio, heightRatio);
-
-                if (onlyScaleDown) ratio = Math.min(ratio, 1);
-
-                finalWidth = (int) Math.round(width * ratio);
-                finalHeight = (int) Math.round(height * ratio);
-            }
-
-            try {
-                newImage = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
-            } catch (OutOfMemoryError e) {
-                return null;
-            }
-        }
-
-        return newImage;
-    }
-
     /**
      * Rotate the specified bitmap with the given angle, in degrees.
      */
@@ -555,15 +502,15 @@ public class ImageResizer {
         }
 
         // Scale image
-        Bitmap scaledImage = ImageResizer.resizeImage(rotatedImage, newWidth, newHeight, mode, onlyScaleDown);
+//         Bitmap scaledImage = ImageResizer.resizeImage(rotatedImage, newWidth, newHeight, mode, onlyScaleDown);
 
-        if(scaledImage == null){
-            throw new IOException("Unable to resize image. Most likely due to not enough memory.");
-        }
+//         if(scaledImage == null){
+//             throw new IOException("Unable to resize image. Most likely due to not enough memory.");
+//         }
 
-        if (scaledImage != rotatedImage) {
-            rotatedImage.recycle();
-        }
+//         if (scaledImage != rotatedImage) {
+//             rotatedImage.recycle();
+//         }
 
         return scaledImage;
     }
