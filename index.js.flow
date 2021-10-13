@@ -1,5 +1,5 @@
 // @flow
-declare type ResizedImageInfo = {
+declare type RotatedPhotoInfo = {
   path: string,
   uri: string,
   size: number,
@@ -8,7 +8,7 @@ declare type ResizedImageInfo = {
   width: number,
 };
 
-declare function createResizedImage(
+declare function createRotatedPhoto(
   uri: string,
   width: number,
   height: number,
@@ -17,8 +17,8 @@ declare function createResizedImage(
   rotation?: number,
   outputPath?: string,
   keepMeta?: boolean
-): Promise<ResizedImageInfo>;
+): Promise<RotatedPhotoInfo>;
 
 declare export default {
-  createResizedImage: typeof createResizedImage,
+  createRotatedPhoto: typeof createRotatedPhoto,
 };

@@ -1,12 +1,12 @@
 {
-  "name": "react-native-image-resizer",
+  "name": "react-native-rotate-photo",
   "version": "1.4.5",
-  "description": "Rescale local images with React Native",
+  "description": "Rotate images with React Native",
   "main": "./index.js",
   "types": "./index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bamlab/react-native-image-resizer.git"
+    "url": "git+https://gitlab.com/getgain-public/libs/react-native-rotate-photo.git"
   },
   "keywords": [
     "react-native",
@@ -15,20 +15,15 @@
     "ios",
     "images",
     "image",
-    "image-resizer",
-    "scaling",
-    "scale",
-    "resize"
+    "photo-rotate",
+    "rotate"
   ],
   "peerDependencies": {
     "react-native": ">=v0.40.0"
   },
   "author": "Florian Rival <florianr@bam.tech> (http://bam.tech)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bamlab/react-native-image-resizer/issues"
-  },
-  "homepage": "https://github.com/bamlab/react-native-image-resizer#readme",
+  "homepage": "https://gitlab.com/getgain-public/libs/react-native-rotate-photo#readme",
   "devDependencies": {
     "cz-conventional-changelog": "^1.2.0"
   },
