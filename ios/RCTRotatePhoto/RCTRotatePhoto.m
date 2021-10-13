@@ -277,7 +277,7 @@ void transformImage(UIImage *image,
     callback(@[[NSNull null], response]);
 }
 
-RCT_EXPORT_METHOD(createResizedImage:(NSString *)path
+RCT_EXPORT_METHOD(createRotatedPhoto:(NSString *)path
                   width:(float)width
                   height:(float)height
                   format:(NSString *)format
