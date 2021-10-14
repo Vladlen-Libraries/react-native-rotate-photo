@@ -1,10 +1,8 @@
-# React Native Image Resizer
+# React Native Rotate Photo
 
-A React Native module that can create scaled versions of local images (also supports the assets library on iOS).
-|react-native| react-native-image-resizer|
-| --- | --- |
-| ≤ 0.60 | 1.1.0 |
-| 0.61 | 1.2.0 |
+[Original library](https://github.com/bamlab/react-native-image-resizer)
+
+A React Native module that can create rotated versions of local images (also supports the assets library on iOS).
 
 ## Setup
 
@@ -13,15 +11,15 @@ Install the package:
 - React Native >= 0.60
 
 ```
-yarn add react-native-image-resizer
+yarn add https://gitlab.com/getgain-public/libs/react-native-rotate-photo.git
 cd ios && pod install
 ```
 
 - React Native <= 0.59
 
 ```
-yarn add react-native-image-resizer
-react-native link react-native-image-resizer
+yarn add https://gitlab.com/getgain-public/libs/react-native-rotate-photo.git
+react-native link react-native-rotate-photo
 ```
 
 ### Android
@@ -35,9 +33,9 @@ Manual link information for Android: [Link](docs/android_manual_config.md)
 ## Usage example
 
 ```javascript
-import ImageResizer from 'react-native-image-resizer';
+import RotatePhoto from 'react-native-rotate-photo';
 
-ImageResizer.createResizedImage(path, maxWidth, maxHeight, compressFormat, quality, rotation, outputPath)
+RotatePhoto.createRotatedPhoto(path, maxWidth, maxHeight, compressFormat, quality, rotation, outputPath)
   .then(response => {
     // response.uri is the URI of the new image that can now be displayed, uploaded...
     // response.path is the path of the new image
@@ -57,7 +55,7 @@ A basic, sample app is available in [the `example` folder](https://github.com/ba
 ## API
 
 ```javascript
-createResizedImage(
+createRotatedPhoto(
   path,
   maxWidth,
   maxHeight,
@@ -66,7 +64,6 @@ createResizedImage(
   rotation = 0,
   outputPath,
   keepMeta = false,
-  options = {}
 ); // Returns a Promise
 ```
 
@@ -82,11 +79,4 @@ The promise resolves with an object containing: `path`, `uri`, `name`, `size` (b
 | rotation              | Rotation to apply to the image, in degrees, for android. On iOS, rotation is limited (and rounded) to multiples of 90 degrees.                                                                                                                                                                                                                                                                                 |
 | outputPath            | The resized image path. If null, resized image will be stored in cache folder. To set outputPath make sure to add option for rotation too (if no rotation is needed, just set it to 0).                                                                                                                                                                                                                        |
 | keepMeta              | If `true`, will attempt to preserve all file metadata/exif info, except the orientation value since the resizing also does rotation correction to the original image. Defaults to `false`, which means all metadata is lost. Note: This can only be `true` for `JPEG` images which are loaded from the file system (not Web).                                                                                  |
-| options.mode          | Similar to [react-native Image's resizeMode](https://reactnative.dev/docs/image#resizemode): either `contain` (the default), `cover`, or `stretch`. `contain` will fit the image within `width` and `height`, preserving its ratio. `cover` preserves the aspect ratio, and makes sure the image is at least `width` wide or `height` tall. `stretch` will resize the image to exactly `width` and `height`. |
-| options.onlyScaleDown | If `true`, will never enlarge the image, and will only make it smaller.                                                                                                                                                                                                                                                                                                                                        |
 
-## 👉 About Bam
-
-We are a 100 people company developing and designing multiplatform applications with [React Native](https://www.bam.tech/agence-react-native-paris) using the Lean & Agile methodology. To get more information on the solutions that would suit your needs, feel free to get in touch by [email](mailto://contact@bam.tech) or through or [contact form](https://www.bam.tech/en/contact)!
-
-We will always answer you with pleasure 😁
