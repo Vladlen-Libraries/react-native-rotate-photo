@@ -23,7 +23,9 @@ import java.util.UUID;
 /**
  * Created by almouro on 19/11/15.
  * Updated by Cristiano on 2019-05-12
+ * Updated by Vladlen Kaveev on 2021-08-14
  */
+
 public class RotatePhotoModule extends ReactContextBaseJavaModule {
     private Context context;
 
@@ -42,7 +44,7 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createResizedImage(
+    public void createRotatedPhoto(
         final String imagePath,
         final int newWidth,
         final int newHeight,
@@ -51,7 +53,6 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
         final int rotation,
         final String outputPath,
         final boolean keepMeta,
-        final ReadableMap options,
         final Callback successCb,
         final Callback failureCb
     ) {
@@ -60,7 +61,7 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
             @Override
             protected void doInBackgroundGuarded(Void... params) {
                 try {
-                    createResizedImageWithExceptions(imagePath, newWidth, newHeight, compressFormat, quality, rotation, outputPath, keepMeta, options, successCb, failureCb);
+                    createRotatedPhotoWithExceptions(imagePath, newWidth, newHeight, compressFormat, quality, rotation, outputPath, keepMeta, successCb, failureCb);
                 }
                 catch (IOException e) {
                     failureCb.invoke(e.getMessage());
@@ -69,20 +70,18 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    private void createResizedImageWithExceptions(String imagePath, int newWidth, int newHeight,
+    private void createRotatedPhotoWithExceptions(String imagePath, int newWidth, int newHeight,
                                            String compressFormatString, int quality, int rotation, String outputPath,
                                            final boolean keepMeta,
-                                           final ReadableMap options,
                                            final Callback successCb, final Callback failureCb) throws IOException {
 
         Bitmap.CompressFormat compressFormat = Bitmap.CompressFormat.valueOf(compressFormatString);
         Uri imageUri = Uri.parse(imagePath);
 
-        Bitmap scaledImage = RotatePhoto.createResizedImage(this.context, imageUri, newWidth, newHeight, quality, rotation,
-                                                             options.getString("mode"), options.getBoolean("onlyScaleDown"));
+        Bitmap rotatedPhoto = RotatePhoto.createRotatedPhoto(this.context, imageUri, newWidth, newHeight, quality, rotation);
 
-        if (scaledImage == null) {
-          throw new IOException("The image failed to be resized; invalid Bitmap result.");
+        if (rotatedPhoto == null) {
+          throw new IOException("The image failed to be rotated; invalid Bitmap result.");
         }
 
         // Save the resulting image
@@ -91,7 +90,7 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
             path = new File(outputPath);
         }
 
-        File resizedImage = RotatePhoto.saveImage(scaledImage, path, UUID.randomUUID().toString(), compressFormat, quality);
+        File resizedImage = RotatePhoto.saveImage(rotatedPhoto, path, UUID.randomUUID().toString(), compressFormat, quality);
 
         // If resizedImagePath is empty and this wasn't caught earlier, throw.
         if (resizedImage.isFile()) {
@@ -100,8 +99,8 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
             response.putString("uri", Uri.fromFile(resizedImage).toString());
             response.putString("name", resizedImage.getName());
             response.putDouble("size", resizedImage.length());
-            response.putDouble("width", scaledImage.getWidth());
-            response.putDouble("height", scaledImage.getHeight());
+            response.putDouble("width", rotatedPhoto.getWidth());
+            response.putDouble("height", rotatedPhoto.getHeight());
 
             // Copy file's metadata/exif info if required
             if(keepMeta){
@@ -109,7 +108,7 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
                     RotatePhoto.copyExif(this.context, imageUri, resizedImage.getAbsolutePath());
                 }
                 catch(Exception ignored){
-                    Log.e("RotatePhoto::createResizedImageWithExceptions", "EXIF copy failed", ignored);
+                    Log.e("RotatePhoto::createRotatedPhotoWithExceptions", "EXIF copy failed", ignored);
                 };
             }
 
@@ -121,6 +120,6 @@ public class RotatePhotoModule extends ReactContextBaseJavaModule {
 
 
         // Clean up bitmap
-        scaledImage.recycle();
+        rotatedPhoto.recycle();
     }
 }

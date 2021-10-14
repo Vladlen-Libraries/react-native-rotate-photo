@@ -463,9 +463,8 @@ public class RotatePhoto {
      * ready to be saved or converted. Ensure that the result is cleaned up after use
      * by using recycle
      */
-    public static Bitmap createResizedImage(Context context, Uri imageUri, int newWidth,
-                                            int newHeight, int quality, int rotation,
-                                            String mode, boolean onlyScaleDown) throws IOException  {
+    public static Bitmap createRotatedPhoto(Context context, Uri imageUri, int newWidth,
+                                            int newHeight, int quality, int rotation) throws IOException  {
         Bitmap sourceImage = null;
         String imageUriScheme = imageUri.getScheme();
 
