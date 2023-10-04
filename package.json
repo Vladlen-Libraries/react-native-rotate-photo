@@ -1,12 +1,12 @@
 {
   "name": "react-native-rotate-photo",
-  "version": "1.4.5",
+  "version": "1.0.0",
   "description": "Rotate images with React Native",
   "main": "./index.js",
   "types": "./index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/getgain-public/libs/react-native-rotate-photo.git"
+    "url": "git+https://github.com/Vladlen-Libraries/react-native-rotate-photo.git"
   },
   "keywords": [
     "react-native",
@@ -21,9 +21,9 @@
   "peerDependencies": {
     "react-native": ">=v0.40.0"
   },
-  "author": "Florian Rival <florianr@bam.tech> (http://bam.tech)",
+  "author": "Vladlen Kaveev",
   "license": "MIT",
-  "homepage": "https://gitlab.com/getgain-public/libs/react-native-rotate-photo#readme",
+  "homepage": "https://github.com/Vladlen-Libraries/react-native-rotate-photo#readme",
   "devDependencies": {
     "cz-conventional-changelog": "^1.2.0"
   },

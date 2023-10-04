@@ -1,5 +1,7 @@
 # React Native Rotate Photo
 
+## Fork with photo rotation support
+
 [Original library](https://github.com/bamlab/react-native-image-resizer)
 
 A React Native module that can create rotated versions of local images (also supports the assets library on iOS).
@@ -11,14 +13,14 @@ Install the package:
 - React Native >= 0.60
 
 ```
-yarn add https://gitlab.com/getgain-public/libs/react-native-rotate-photo.git
+yarn add react-native-rotate-photo 
 cd ios && pod install
 ```
 
 - React Native <= 0.59
 
 ```
-yarn add https://gitlab.com/getgain-public/libs/react-native-rotate-photo.git
+yarn add react-native-rotate-photo
 react-native link react-native-rotate-photo
 ```
 
